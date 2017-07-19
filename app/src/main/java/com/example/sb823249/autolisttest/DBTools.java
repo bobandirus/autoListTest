@@ -43,7 +43,8 @@ public class DBTools extends SQLiteOpenHelper{
 
     public ArrayList<String> theHeadings(){
       ArrayList<String> theHeadings = new ArrayList<>();
-        String query = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'food' ORDER BY ORDINAL_POSITION";
+        //String query = "SELECT COLUMN_NAME FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'food' ORDER BY ORDINAL_POSITION";
+        String query = "PRAGMA table_info(food)";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(query, null);
         if (cursor.moveToFirst()){
@@ -63,7 +64,7 @@ public class DBTools extends SQLiteOpenHelper{
 
     public ArrayList<String> theOptions(String column){
         ArrayList<String> theOptions = new ArrayList<>();
-        String query = "SELECT DISTINCT " + column + "FROM food";
+        String query = "SELECT DISTINCT " + column + " FROM food";
         SQLiteDatabase database = this.getWritableDatabase();
         Cursor cursor = database.rawQuery(query, null);
         if (cursor.moveToFirst()){
