@@ -44,9 +44,13 @@ public class MainActivity extends ListActivity{
         for (int a = 0; a < theQuestions.size(); a++){
             HashMap<String, String> eachQuestion = new HashMap<>();
             eachQuestion.put("question", theQuestions.get(a));
-            Toast.makeText(getApplicationContext(), "" + theQuestions.get(a) + "", Toast.LENGTH_SHORT).show();
+            //Check to see that the headings are retreived.
+            //they are
+            //Toast.makeText(getApplicationContext(), "column: " + theQuestions.get(a) + "", Toast.LENGTH_SHORT).show();
             ArrayList<String> answers = dbTools.theOptions(theQuestions.get(a));
             for (int b = 0; b < answers.size(); b++){
+                //another data getting check
+                //Toast.makeText(getApplicationContext(), "answer: "+answers.get(b) + "", Toast.LENGTH_SHORT).show();
                 eachQuestion.put("" + b + "", answers.get(b));
             }
             theStuff.add(eachQuestion);
@@ -80,13 +84,17 @@ public class MainActivity extends ListActivity{
 
             View row = super.getView(position, convertView, parent);
 
+            Toast.makeText(getApplicationContext(), "hello", Toast.LENGTH_SHORT).show();
+
             for (int a = 0; a < theStuff.size(); a++) {
+                Toast.makeText(getApplicationContext(), "hello", Toast.LENGTH_SHORT).show();
                 HashMap<String, String> data = theStuff.get(a);
                 //View row = super.getView(position, convertView, parent);
                 Iterator iterator = data.keySet().iterator();
                 ArrayList<String> options = new ArrayList<>();
                 while (iterator.hasNext()){
                     String key = (String)iterator.next();
+                    Toast.makeText(getApplicationContext(), "key: " + key + "", Toast.LENGTH_SHORT).show();
                     if (key.equals("question")){
                         TextView question = (TextView) findViewById(R.id.qestion);
                         question.setText(data.get("question"));
