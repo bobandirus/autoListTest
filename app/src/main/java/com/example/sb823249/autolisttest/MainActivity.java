@@ -45,19 +45,23 @@ public class MainActivity extends AppCompatActivity{
         //ArrayList<HashMap<String, String>>
                 //theStuff = new ArrayList<>();
         for (int a = 0; a < theQuestions.size(); a++){
-            HashMap<String, String> eachQuestion = new HashMap<>();
-            eachQuestion.put("question", theQuestions.get(a));
-            //Check to see that the headings are retreived.
-            //they are
-            Toast.makeText(getApplicationContext(), "column: " + theQuestions.get(a) + " number: " + a + "", Toast.LENGTH_SHORT).show();
-            ArrayList<String> answers = dbTools.theOptions(theQuestions.get(a));
-            for (int b = 0; b < answers.size(); b++){
-                //another data getting check
-                Toast.makeText(getApplicationContext(), "The question: " + theQuestions.get(a) + "number :" + a + "answer: "+answers.get(b) + " number: " + b + "", Toast.LENGTH_SHORT).show();
-                System.out.print("The question: " + theQuestions.get(a) + "number :" + a + "answer: "+answers.get(b) + " number: " + b + "\r\n");
-                eachQuestion.put("" + b + "", answers.get(b));
+            if (theQuestions.get(a).equals(String.valueOf("specificId"))){
+                //Toast.makeText(getApplicationContext(), "horray", Toast.LENGTH_SHORT).show();
+            } else {
+                HashMap<String, String> eachQuestion = new HashMap<>();
+                eachQuestion.put("question", theQuestions.get(a));
+                //Check to see that the headings are retreived.
+                //they are
+                Toast.makeText(getApplicationContext(), "column: " + theQuestions.get(a) + " number: " + a + "", Toast.LENGTH_SHORT).show();
+                ArrayList<String> answers = dbTools.theOptions(theQuestions.get(a));
+                for (int b = 0; b < answers.size(); b++) {
+                    //another data getting check
+                    Toast.makeText(getApplicationContext(), "The question: " + theQuestions.get(a) + "number :" + a + "answer: " + answers.get(b) + " number: " + b + "", Toast.LENGTH_SHORT).show();
+                    System.out.print("The question: " + theQuestions.get(a) + "number :" + a + "answer: " + answers.get(b) + " number: " + b + "\r\n");
+                    eachQuestion.put("" + b + "", answers.get(b));
+                }
+                theStuff.add(eachQuestion);
             }
-            theStuff.add(eachQuestion);
         }
         //manually adding a question to ensure that there's somethign in teh list
         //HashMap<String, String> finalBit = new HashMap<>();

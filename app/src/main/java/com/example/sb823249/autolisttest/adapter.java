@@ -87,6 +87,9 @@ public class adapter extends ArrayAdapter<HashMap<String, String>>{
             radioGroup.addView(radioButtons[a]);
             radioButtons[a].setText(options.get(a));
         }
+        RadioButton bob = new RadioButton(getContext());
+        bob.setText("bob");
+        radioGroup.addView(bob);
         return radioGroup;
     }
 }
