@@ -18,19 +18,19 @@ public class DBTools extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase database){
-        String createDatabase = "CREATE TABLE food (specificId INGEGER PRIMARY KEY, one TEXT, two TEXT, three TEXT, four TEXT)";
+        String createDatabase = "CREATE TABLE food (specificId INGEGER PRIMARY KEY, name TEXT, good_breakfast TEXT, best_sauce TEXT, favourite_plant_type TEXT)";
         database.execSQL(createDatabase);
-        String insert_1  =  "INSERT INTO food (specificId, one, two, three, four) values (1, 'werdna', 'sgge', 'oyam', 'dihcro')";
+        String insert_1  =  "INSERT INTO food (specificId, name, good_breakfast, best_sauce, favourite_plant_type) values (7, 'werdna', 'sgge', 'oyam', 'dihcro')";
         database.execSQL(insert_1);
-        String insert_2  =  "INSERT INTO food (specificId, one, two, three, four) values (2, 'atiwas', 'nocab', 'oyam', 'eeffoc')";
+        String insert_2  =  "INSERT INTO food (specificId, name, good_breakfast, best_sauce, favourite_plant_type) values (2, 'atiwbs', 'nocab', 'oyam', 'chilli')";
         database.execSQL(insert_2);
-        String insert_3  =  "INSERT INTO food (specificId, one, two, three, four) values (3, 'nadroj', 'sgge', 'puhctek', 'sffad')";
+        String insert_3  =  "INSERT INTO food (specificId, name, good_breakfast, best_sauce, favourite_plant_type) values (3, 'nadroj', 'sgge', 'puhctek', 'sffad')";
         database.execSQL(insert_3);
-        String insert_4  =  "INSERT INTO food (specificId, one, two, three, four) values (4, 'airam', 'seotamot', 'oyam', 'selppa')";
+        String insert_4  =  "INSERT INTO food (specificId, name, good_breakfast, best_sauce, favourite_plant_type) values (4, 'airam', 'seotamot', 'oyam', 'selppa')";
         database.execSQL(insert_4);
-        String insert_5  =  "INSERT INTO food (specificId, one, two, three, four) values (5, 'namlak', 'seotamot', 'oyam', 'arennug')";
+        String insert_5  =  "INSERT INTO food (specificId, name, good_breakfast, best_sauce, favourite_plant_type) values (5, 'namlak', 'seotamot', 'oyam', 'arennug')";
         database.execSQL(insert_5);
-        String insert_6  =  "INSERT INTO food (specificId, one, two, three, four) values (6, 'riatsala', 'sgge', 'puhctek', 'spartylf')";
+        String insert_6  =  "INSERT INTO food (specificId, name, good_breakfast, best_sauce, favourite_plant_type) values (6, 'riatsala', 'sgge', 'puhctek', 'spartylf')";
         database.execSQL(insert_6);
     }
 
@@ -73,7 +73,7 @@ public class DBTools extends SQLiteOpenHelper{
         Cursor cursor = database.rawQuery(query, null);
         if (cursor.moveToFirst()){
             do{
-                String name = new StringBuilder(cursor.getString(0)).toString();
+                String name = new StringBuilder(cursor.getString(0)).reverse().toString();
                 theOptions.add(name);
             }while (cursor.moveToNext());
         }

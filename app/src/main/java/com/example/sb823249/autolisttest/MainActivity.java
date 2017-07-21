@@ -21,13 +21,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 
-public class MainActivity extends ListActivity{
+public class MainActivity extends AppCompatActivity{
 
     DBTools dbTools;
     radioButtonSetMaker radioButtonSet;
     RadioGroup radioGroup;
     SimpleCursorAdapter adapter;
-    private static final ArrayList<HashMap<String, String>> theStuff = new ArrayList<>();
+    public static final ArrayList<HashMap<String, String>> theStuff = new ArrayList<>();
+    //public static final HashMap<Stri>
+    private static adapter cleverAdapter;
 
     ListView listView;
 
@@ -39,6 +41,7 @@ public class MainActivity extends ListActivity{
         dbTools = new DBTools(this);
         radioButtonSet = new radioButtonSetMaker();
         ArrayList<String> theQuestions = dbTools.theHeadings();
+        listView = (ListView) findViewById(R.id.list);
         //ArrayList<HashMap<String, String>>
                 //theStuff = new ArrayList<>();
         for (int a = 0; a < theQuestions.size(); a++){
@@ -46,21 +49,24 @@ public class MainActivity extends ListActivity{
             eachQuestion.put("question", theQuestions.get(a));
             //Check to see that the headings are retreived.
             //they are
-            //Toast.makeText(getApplicationContext(), "column: " + theQuestions.get(a) + "", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "column: " + theQuestions.get(a) + " number: " + a + "", Toast.LENGTH_SHORT).show();
             ArrayList<String> answers = dbTools.theOptions(theQuestions.get(a));
             for (int b = 0; b < answers.size(); b++){
                 //another data getting check
-                //Toast.makeText(getApplicationContext(), "answer: "+answers.get(b) + "", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "The question: " + theQuestions.get(a) + "number :" + a + "answer: "+answers.get(b) + " number: " + b + "", Toast.LENGTH_SHORT).show();
+                System.out.print("The question: " + theQuestions.get(a) + "number :" + a + "answer: "+answers.get(b) + " number: " + b + "\r\n");
                 eachQuestion.put("" + b + "", answers.get(b));
             }
             theStuff.add(eachQuestion);
         }
         //manually adding a question to ensure that there's somethign in teh list
-        HashMap<String, String> finalBit = new HashMap<>();
-        finalBit.put("question", "finalQuestion");
-        finalBit.put("0", "finalAnswer");
-        theStuff.add(finalBit);
-        setListAdapter(new cleverAdapter());
+        //HashMap<String, String> finalBit = new HashMap<>();
+        //finalBit.put("question", "finalQuestion");
+        //finalBit.put("0", "finalAnswer");
+        //theStuff.add(finalBit);
+        cleverAdapter = new adapter(theStuff, getApplicationContext());
+        //setListAdapter(new cleverAdapter());
+        listView.setAdapter(cleverAdapter);
 
 
 
@@ -74,7 +80,12 @@ public class MainActivity extends ListActivity{
        // }
     }
 
-    class cleverAdapter extends ArrayAdapter<String>{
+
+
+
+
+    /**
+      class cleverAdapter extends ArrayAdapter<String>{
         cleverAdapter(){
             super(MainActivity.this, R.layout.entry, R.id.qestion);
         }
@@ -118,4 +129,5 @@ public class MainActivity extends ListActivity{
             return row;
         }
     }
+     **/
 }
