@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.ListAdapter;
@@ -30,6 +31,11 @@ public class MainActivity extends AppCompatActivity{
     public static final ArrayList<HashMap<String, String>> theStuff = new ArrayList<>();
     //public static final HashMap<Stri>
     private static adapter cleverAdapter;
+    //private static CustomAdaptor
+
+    //this feels like a hack
+    //public static final ArrayList<HashMap<String, String>> questions = new ArrayList<>();
+    //public static final ArrayList<HashMap<String, RadioButton[]>> theAnswers = new ArrayList<>();
 
     ListView listView;
 
@@ -52,26 +58,47 @@ public class MainActivity extends AppCompatActivity{
                 eachQuestion.put("question", theQuestions.get(a));
                 //Check to see that the headings are retreived.
                 //they are
-                Toast.makeText(getApplicationContext(), "column: " + theQuestions.get(a) + " number: " + a + "", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(getApplicationContext(), "column: " + theQuestions.get(a) + " number: " + a + "", Toast.LENGTH_SHORT).show();
                 ArrayList<String> answers = dbTools.theOptions(theQuestions.get(a));
+               // RadioButton[] temp = radioButtonSet.radioGroup(answers);
+
                 for (int b = 0; b < answers.size(); b++) {
                     //another data getting check
-                    Toast.makeText(getApplicationContext(), "The question: " + theQuestions.get(a) + "number :" + a + "answer: " + answers.get(b) + " number: " + b + "", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(getApplicationContext(), "The question: " + theQuestions.get(a) + "number :" + a + "answer: " + answers.get(b) + " number: " + b + "", Toast.LENGTH_SHORT).show();
                     System.out.print("The question: " + theQuestions.get(a) + "number :" + a + "answer: " + answers.get(b) + " number: " + b + "\r\n");
                     eachQuestion.put("" + b + "", answers.get(b));
                 }
                 theStuff.add(eachQuestion);
+
+
+                ///**HashMap<String, String> eachQuestion = new HashMap<>();
+                //HashMap<String, RadioButton[]> eachAnswerSet = new HashMap<>();
+                //eachQuestion.put("question", theQuestions.get(a));
+                //ArrayList<String> answers = dbTools.theOptions(theQuestions.get(a));
+                //RadioButton[] temp = radioButtonSet.radioGroup(answers);
+                //questions.add(eachQuestion);
+                //theAnswers.add(eachAnswerSet);**/
             }
         }
+        //theAnswers = new HashMap<>()
         //manually adding a question to ensure that there's somethign in teh list
         //HashMap<String, String> finalBit = new HashMap<>();
         //finalBit.put("question", "finalQuestion");
         //finalBit.put("0", "finalAnswer");
         //theStuff.add(finalBit);
         cleverAdapter = new adapter(theStuff, getApplicationContext());
+        //cleverAdapter = new adapter(questions, theAnswers, getApplicationContext());
         //setListAdapter(new cleverAdapter());
         listView.setAdapter(cleverAdapter);
 
+
+        listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                System.out.print("jkl");
+                Toast.makeText(getApplicationContext(), "hello there", Toast.LENGTH_SHORT).show();
+            }
+        });
 
 
         //if (theStuff.size() != 0){
@@ -82,6 +109,11 @@ public class MainActivity extends AppCompatActivity{
         //    ListView listView = getListView();
         //    ListAdapter adapter = new SimpleAdapter(MainActivity.this, theQuestions, )
        // }
+    }
+
+    public void results(View view){
+        String temp = cleverAdapter.theSearchQuery();
+        Toast.makeText(getApplicationContext(), "" + temp + "", Toast.LENGTH_SHORT).show();
     }
 
 

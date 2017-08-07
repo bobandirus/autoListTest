@@ -32,7 +32,7 @@ public class radioButtonSetMaker extends AppCompatActivity{
         //temp.setOrientation(RadioGroup.VERTICAL);
         RadioButton[] tempButtons = new RadioButton[options.size()];
         for (int a = 0; a < options.size(); a++){
-            tempButtons[a] = new RadioButton(this);
+            //tempButtons[a] = new RadioButton(this);
             //temp.addView(tempButtons[a]);
             tempButtons[a].setText(options.get(a));
         }
